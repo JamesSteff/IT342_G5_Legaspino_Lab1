@@ -14,13 +14,13 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 
-                {/* Protected Route Logic */}
+                {}
                 <Route 
                     path="/dashboard" 
                     element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
                 />
 
-                {/* Default route redirect */}
+                {}
                 <Route path="/" element={<Navigate to="/login" />} />
             </Routes>
         </Router>
