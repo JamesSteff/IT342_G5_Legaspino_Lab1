@@ -1,4 +1,4 @@
-# Lab 2 Task Checklist: User Authentication System
+# IT342 Lab 2: User Registration and Authentication System (Spring Boot + React)
 
 ## DONE
 - [x] **Setup MySQL Database**: Created `it342_lab2` schema and `users` table.
@@ -10,8 +10,5 @@
 - [x] **Navigation Links**: Added "Go to Login" and "Register here" links for seamless UI flow.
 
 ## IN-PROGRESS
-- [ ] **Final Documentation**: Compiling the FRS PDF including ERD, UML diagrams, and UI screenshots.
 
 ## TODO
-- [ ] **Final Repository Sync**: Perform a final `git push` to ensure the remote branch is up to date.
-- [ ] **Submission**: Submit the final GitHub repository link and the latest commit hash to the portal.
