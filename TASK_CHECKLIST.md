@@ -12,8 +12,8 @@
 - [x] **Folder Structure**: Finalized root folders (backend, web, docs, mobile). (Commit: `8c8282e`)
 
 ## IN-PROGRESS
-- None (All features implemented)
+
 
 ## TODO
-- [ ] Future improvement: Add Email Verification (Optional)
-- [ ] Future improvement: Profile Picture Upload (Optional)
+
+
