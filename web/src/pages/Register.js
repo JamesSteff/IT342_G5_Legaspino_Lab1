@@ -6,7 +6,8 @@ const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     });
     const navigate = useNavigate();
 
@@ -16,60 +17,41 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Basic validation: Ensure passwords match
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
         try {
-            
-            const response = await axios.post('http://localhost:8080/api/auth/register', formData);
+            // Sends user registration data to backend
+            const response = await axios.post('http://localhost:8080/api/auth/register', {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password
+            });
             alert(response.data); 
             navigate('/login'); 
         } catch (error) {
             console.error("Registration Error:", error);
-            alert("Failed to register. Check console.");
+            alert("Failed to register. Please check the console for details.");
         }
     };
 
     return (
-        <div className="register-container" style={{ padding: '20px', maxWidth: '400px' }}>
-            <h2>Create Account</h2>
+        <div style={{ padding: '40px', maxWidth: '400px', margin: 'auto', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', borderRadius: '12px', marginTop: '50px' }}>
+            <h2 style={{ color: '#1a73e8' }}>Create Account</h2>
             <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '10px' }}>
-                    <input 
-                        type="text" 
-                        name="username" 
-                        placeholder="Username" 
-                        onChange={handleChange} 
-                        required 
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="Email" 
-                        onChange={handleChange} 
-                        required 
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        placeholder="Password" 
-                        onChange={handleChange} 
-                        required 
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                </div>
-                <button type="submit" style={{ padding: '10px 20px', cursor: 'pointer' }}>
-                    Register
+                <input type="text" name="username" placeholder="Username" onChange={handleChange} required style={{ width: '100%', padding: '10px', marginBottom: '15px', borderRadius: '5px', border: '1px solid #ddd' }} />
+                <input type="email" name="email" placeholder="Email" onChange={handleChange} required style={{ width: '100%', padding: '10px', marginBottom: '15px', borderRadius: '5px', border: '1px solid #ddd' }} />
+                <input type="password" name="password" placeholder="Password" onChange={handleChange} required style={{ width: '100%', padding: '10px', marginBottom: '15px', borderRadius: '5px', border: '1px solid #ddd' }} />
+                <input type="password" name="confirmPassword" placeholder="Repeat Password" onChange={handleChange} required style={{ width: '100%', padding: '10px', marginBottom: '20px', borderRadius: '5px', border: '1px solid #ddd' }} />
+                <button type="submit" style={{ width: '100%', padding: '10px', backgroundColor: '#1a73e8', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    REGISTER
                 </button>
             </form>
-
-            {}
-            <p style={{ marginTop: '20px' }}>
-                Already have an account? <Link to="/login">Login here</Link>
-            </p>
+            <p style={{ marginTop: '20px' }}>Already have an account? <Link to="/login" style={{ color: '#1a73e8', textDecoration: 'none' }}>Login here</Link></p>
         </div>
     );
 };
