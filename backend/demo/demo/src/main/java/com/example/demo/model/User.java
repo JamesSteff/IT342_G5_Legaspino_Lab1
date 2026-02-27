@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Fixed: Now matches "username" sent from React
+    @JsonProperty("username") 
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -30,7 +34,7 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    // Manual Getters and Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getUsername() { return username; }

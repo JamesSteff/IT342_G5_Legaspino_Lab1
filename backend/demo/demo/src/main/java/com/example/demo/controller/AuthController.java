@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,25 +20,22 @@ import com.example.demo.repository.UserRepository;
 @CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired private UserRepository userRepository;
+    @Autowired private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "User Registered Successfully!";
+        return ResponseEntity.ok(Map.of("message", "User Registered Successfully!"));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User loginReq) {
+    public ResponseEntity<?> login(@RequestBody User loginReq) {
         Optional<User> user = userRepository.findByEmail(loginReq.getEmail());
         if (user.isPresent() && passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
-            return "Login Success!";
+            return ResponseEntity.ok(Map.of("message", "Login Success", "token", "mock-jwt-token"));
         }
-        return "Invalid Credentials!";
+        return ResponseEntity.status(401).body(Map.of("message", "Invalid Credentials"));
     }
 }
