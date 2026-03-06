@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package edu.cit.legaspino.quickcontacts.controller;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package edu.cit.legaspino.quickcontacts.model;
 
 import java.time.LocalDateTime;
 

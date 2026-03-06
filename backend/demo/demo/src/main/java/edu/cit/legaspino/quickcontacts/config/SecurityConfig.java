@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package edu.cit.legaspino.quickcontacts.config;
 
 import java.util.List;
 
